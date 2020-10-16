@@ -1,6 +1,30 @@
-import React from "react";
+import React, { useRef, useLayoutEffect } from "react";
+import axios from "axios";
+import { Chart } from "chart.js";
 
 function HomePage() {
+  const chartRef = useRef();
+  useLayoutEffect(() => {
+    axios.get("/budget").then((res) => {
+      const data = {
+        datasets: [
+          {
+            data: [],
+            backgroundColor: ["#ffcd56", "#ff6384", "#36a2eb", "#E952DE", "#ED254E", "#18FF6D", "#5BC3EB"],
+          },
+        ],
+        labels: [],
+      };
+      data.datasets[0].data = res.data.map((a) => a.budget);
+      data.labels = res.data.map((a) => a.title);
+      const ctx = chartRef.current.getContext("2d");
+      // eslint-disable-next-line no-unused-vars
+      const _pieChart = new Chart(ctx, {
+        type: "pie",
+        data,
+      });
+    });
+  }, []);
   return (
     <main className={"container center"}>
       <div className={"page-area"}>
@@ -49,7 +73,7 @@ function HomePage() {
         <div className={"text-box"}>
           <h1>Chart</h1>
           <p>
-            <canvas id={"chart"} width={"400"} height={"400"} />
+            <canvas ref={chartRef} width={"400"} height={"400"} />
           </p>
         </div>
       </div>
