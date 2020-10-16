@@ -17,7 +17,21 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": "a1motion/react",
+    "rules": {
+      "prettier/prettier": [
+        "error",
+        {
+          "trailingComma": "es5",
+          "printWidth": 120,
+          "semi": true,
+          "jsxBracketSameLine": true,
+          "arrowParens": "always",
+          "endOfLine": "lf",
+          "singleQuote": false
+        }
+      ]
+    }
   },
   "browserslist": {
     "production": [
@@ -30,5 +44,15 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.11.0",
+    "eslint-config-a1motion": "^3.3.4",
+    "eslint-config-prettier": "^6.13.0",
+    "eslint-formatter-pretty": "^4.0.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.21.4",
+    "prettier": "^2.1.2"
   }
 }
